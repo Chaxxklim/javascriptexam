@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test-div">
+        
+    </div>
+    <div>
+        <button onclick="test()">버튼</button>
+    </div>
+
+</body>
+<script>
+    function test(){
+        const xhr = new XMLHttpRequest(); 
+        const method = "GET"; 
+        const url = "https://codingapple1.github.io/vue/more0.json";
+        // const url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1005"; 
+        // 요청 초기화
+        xhr.open(method, url); 
+        // onreadystatechange -> 응답결과 
+        xhr.onreadystatechange = function (event) { 
+            const { target } = event; 
+            if (target.readyState === XMLHttpRequest.DONE) 
+            { const { status } = target;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                let data = xhr.response;
+                // 정상요청
+                document.getElementById("test-div").innerHTML = data;
+                console.log("event" + data);
+                } else { // 에러발생 
+                    document.getElementById("test-div").innerHTML = "안됨메롱";
+                } 
+            } 
+        }; // 서버에 요청 
+        xhr.send();
+    }
+    
+
+</script>
+</html>
